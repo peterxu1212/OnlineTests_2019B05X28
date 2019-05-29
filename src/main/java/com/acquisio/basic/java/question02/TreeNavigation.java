@@ -25,11 +25,41 @@ public class TreeNavigation {
     }
 
     private void treeNode() {
-        Node n1 = new Node("6", new Node("5"), new Node("11"));
-        Node n2 = new Node("7", new Node("2"), n1);
-        Node n3 = new Node("9", new Node("4"));
-        Node n4 = new Node("5", null, n3);
-        Node n = new Node("2", n2, n4);
+
         // TODO: Implement code here
+		Node n_level_4_a = new Node("5", null, null);
+        Node n_level_4_b = new Node("11", null, null);
+        Node n_level_4_c = new Node("4", null, null);		
+		
+		Node n_level_3_a = new Node("2", null, null);
+        Node n_level_3_b = new Node("6", n_level_4_a, n_level_4_b);
+        Node n_level_3_c = new Node("9", n_level_4_c, null);
+        
+        Node n_level_2_a = new Node("7", n_level_3_a, n_level_3_b);
+        Node n_level_2_b = new Node("5", null, n_level_3_c);
+        
+        Node n_level_1 = new Node("2", n_level_2_a, n_level_2_b);
+        
+        
+        n_level_1.PrintNode("..");
+		
+		/*  
+		
+		the output is as following:
+		
+			..2
+			....7
+			......2
+			......6
+			........5
+			........11
+			....5
+			......9
+			........4
+
+		
+		*/
+		
+		
     }
 }

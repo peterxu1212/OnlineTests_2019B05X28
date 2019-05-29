@@ -14,13 +14,35 @@ package com.acquisio.basic.java.question01;
 public class FooBar {
     public static void main(String[] args) {
         FooBar main = new FooBar();
-        for (int i = 1; i <= 50; i ++) {
+        for (int i = 1; i <= 50; i++) {
             System.out.println(main.fooBar(i));
         }
     }
 
-    String fooBar(int value) {
-        // TODO: Insert your code here
-        return null;
+	String fooBar(int value) {
+        // TODO: Insert your code here		
+		String strOutput = "";		
+		
+		if (value % 3 == 0 || value % 5 == 0) {
+			if (value % 3 != 0) {
+				// % 5 == 0 only
+				strOutput = "Bar";
+			}
+
+			if (value % 5 != 0) {
+				// % 3 == 0 only
+				strOutput = "Foo";
+			}
+			
+			if (value % 3 == 0 && value % 5 == 0) {
+				//when % 15 (3 * 5) == 0, return both
+				strOutput = "Bar" + " " + "Foo";
+			}
+		}
+		else {			
+			strOutput = Integer.toString(value);
+		}
+
+        return strOutput;
     }
 }

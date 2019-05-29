@@ -12,6 +12,19 @@ class Node {
                     children, 0, this.children, 0, children.length);
         }
     }
+    
+    public void PrintNode(String strDepth) {    	
+    	
+    	System.out.println(strDepth + this.name);    	
+    	if (children != null) {    		
+    		for (int i = 0; i < children.length; i++) {    			
+    			Node childNode = children[i];
+    			if (childNode != null) {    				
+    				childNode.PrintNode(strDepth + "..");
+    			}    			    			
+    		}    		
+    	}    	
+    }
 }
 
 
