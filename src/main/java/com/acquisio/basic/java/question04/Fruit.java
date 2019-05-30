@@ -7,7 +7,7 @@ class Fruit extends Item {
         super(name, quantity, price);
         this.color = color;
     }
-
+	
     public String getColor() {
         return color;
     }

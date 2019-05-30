@@ -103,15 +103,34 @@ package com.acquisio.basic.java.question05;
  * <p>
  * IMPORTANT: Ajouter toute la javadoc et les test unitaires que vous jugez nécessaire.
  */
+ 
+//ant run-utility-q5 -Dutility=Refactoring
+ 
 public class Refactoring {
-    Item[] items;
+	
+	public static void main(String[] args) {
+        
+		
+		Item[] items = new Item[]{new Item("foo", 0, 0)};
+		Refactoring app = new Refactoring(items);
+		Refactoring instance = new Refactoring(items);
+        instance.updateQuality();
+        //app.updateQuality();
+		
+		System.out.println("app name: " + app.items[0].name);	
+    }
+	
+    public static Item[] items;
 
     public Refactoring(Item[] items) {
         this.items = items;
     }
 
-    public void updateQuality() {
+	/*
+	//public static void updateQuality() {
+    public static void updateQualityOld() {
         for (int i = 0; i < items.length; i++) {
+			
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
@@ -161,5 +180,112 @@ public class Refactoring {
                 }
             }
         }
+		
     }
+	*/
+	
+	//public static void updateQualityNew() {
+	public static void updateQuality() {
+		
+        for (int i = 0; i < items.length; i++) {			
+            
+			//update sellIn
+			switch(items[i].name) 
+			{ 
+				case "Sulfuras, Hand of Ragnaros":					
+					break;
+					
+				default: 
+					//all other names, except "Sulfuras, Hand of Ragnaros":
+					//such that --
+					//"Aged Brie", 
+					//"Backstage passes to a TAFKAL80ETC concert", 
+					//"Conjured", 
+					//and normal (general) case
+					items[i].sellIn--;
+					break;
+			}			
+			
+			//update quality
+			switch(items[i].name) 
+			{ 
+				case "Sulfuras, Hand of Ragnaros":
+					items[i].quality = 80;
+					break;
+				
+				case "Aged Brie":
+					//keep on increase quality, regardless of sellIn >=0 or sellIn < 0 
+					if (items[i].quality < 50) {
+                        items[i].quality++;
+                    }
+					
+					break;			
+					
+				case "Backstage passes to a TAFKAL80ETC concert": 
+					if (items[i].quality < 50) {
+                        items[i].quality++;
+                    }
+					
+					if (items[i].sellIn < 10) {
+						if (items[i].quality < 50) {
+							items[i].quality++;
+						}
+					}
+
+					if (items[i].sellIn < 5) {
+						if (items[i].quality < 50) {
+							items[i].quality++;
+						}
+					}
+					
+					if (items[i].sellIn < 0) {
+						items[i].quality = 0;						
+					}
+					
+					break;
+				
+				case "Conjured":
+					if (items[i].quality > 0) {
+						items[i].quality--;						
+					}
+					
+					if (items[i].quality > 0) {
+						items[i].quality--;						
+					}
+					
+					if (items[i].sellIn < 0) {
+						if (items[i].quality > 0) {
+							items[i].quality--;	
+						}
+
+						if (items[i].quality > 0) {
+							items[i].quality--;	
+						}
+					}					
+					
+					break;
+					
+				default: 
+					//all other names, normal (general) case
+					if (items[i].quality > 0) {
+						items[i].quality--;						
+					}
+					
+					if (items[i].sellIn < 0) {
+						if (items[i].quality > 0) {
+							items[i].quality--;						
+						}						
+					}
+					
+					break;
+					
+			}			
+			
+        }
+		
+    }
+	
+	
+	
+	
 }
