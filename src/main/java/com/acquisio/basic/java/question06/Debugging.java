@@ -13,6 +13,9 @@ import java.util.Iterator;
  *
  * IMPORTANT: Add all missing javadoc and/or unit tests that you think is necessary.
  */
+ 
+//ant run-utility-q6 -Dutility=Debugging
+ 
 public class Debugging {
 
     public static void main(String[] args) {

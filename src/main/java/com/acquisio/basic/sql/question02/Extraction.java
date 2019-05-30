@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+//ant run-utility-sql-q2 -Dutility=Extraction
+
 /**
  * Write a query to extract all employees that are not assigned to any project.
  * -- The select should output those columns
@@ -50,7 +53,11 @@ public class Extraction {
 
             // TODO: Insert query here
             // See requirement in this class javadoc
-            String query = "select 1 as dummyValue from dual";
+            //String query = "select 1 as dummyValue from dual";
+
+			
+			String query = "SELECT employees.first_name AS FirstName, employees.last_name AS LastName, departments.name AS DepartmentName FROM employees LEFT JOIN employees_projects ON employees.id = employees_projects.employee_id LEFT JOIN departments ON employees.department_id = departments.id WHERE employees_projects.project_id is NULL";
+						
             
             ResultSet resultSet = conn.createStatement().executeQuery(query);
             H2DBUtil.displayResultSet(resultSet);

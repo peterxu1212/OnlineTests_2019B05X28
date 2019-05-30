@@ -17,6 +17,9 @@ package com.acquisio.basic.java.question02;
  *
  * IMPORTANT: Add all missing javadoc and/or unit tests that you think is necessary.
  */
+ 
+//ant run-utility-q2 -Dutility=TreeNavigation
+ 
 public class TreeNavigation {
 
     public static void main(String[] args) {

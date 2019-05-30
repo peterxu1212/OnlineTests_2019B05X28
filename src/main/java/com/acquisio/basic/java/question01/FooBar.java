@@ -11,6 +11,9 @@ package com.acquisio.basic.java.question01;
  *
  * IMPORTANT: Add all missing javadoc and/or unit tests that you think is necessary.
  */
+ 
+//ant run-utility-q1 -Dutility=FooBar
+ 
 public class FooBar {
     public static void main(String[] args) {
         FooBar main = new FooBar();
