@@ -1,0 +1,135 @@
+<project name="Acquisio Online Test Ant Automation">
+  <property name="main.build.dir" value="build/main"/>
+  <property name="main.src.dir" value="src/main/java"/>
+  <property name="test.build.dir" value="build/test"/>
+  <property name="test.src.dir" value="src/test/java"/>
+  <property name="lib.dir" value="lib"/>
+  <property name="resources.dir" value="src/main/resources"/>
+  <property name="test.jar" value="${main.build.dir}/test.jar"/>
+
+  <path id="test.classpath">
+    <pathelement location="lib/junit-4.10.jar"/>
+    <pathelement location="lib/hamcrest-core-1.3.jar"/>
+	<pathelement location="lib/h2-1.4.197.jar"/>	
+	<pathelement location="lib/commons-io-2.6.jar"/>	
+	<pathelement location="${main.build.dir}"/>
+  </path>
+  
+  <target name="clean" description="cleans build output">
+        <delete dir="${main.build.dir}" quiet="true" includeemptydirs="true"/>
+		<delete dir="${test.build.dir}" quiet="true" includeemptydirs="true"/>
+  </target>
+  
+  <target name="resources">
+        <copy todir="${main.build.dir}">
+            <fileset dir="${resources.dir}"/>
+        </copy>
+  </target>
+
+  <target name="compile">
+    <mkdir dir="${main.build.dir}"/>
+    <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" includeantruntime="false"/>
+  </target>
+  
+  <target name="build" depends="resources" description="sets up the environment for test execution">
+        <mkdir dir="${main.build.dir}"/>
+        <javac debug="true"
+               srcdir="${main.src.dir}"
+               destdir="${main.build.dir}"
+               includeAntRuntime="false"
+               classpathref="test.classpath"/>
+        <!--jar basedir="${main.build.dir}" jarfile="${test.jar}"/-->
+   </target>
+
+  <target name="test-compile" depends="compile">
+    <mkdir dir="${test.build.dir}"/>
+    <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
+        <classpath refid="test.classpath"/>
+    </javac>
+  </target>
+  
+  <target name="run-utility-q1" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question01.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q2" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question02.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q3" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question03.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q4" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question04.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q5" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question05.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q6" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question06.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q7" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question07.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-q8" description="run command-line utility">
+        <java classname="com.acquisio.basic.java.question08.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+    
+   <target name="run-utility-sql-q1" description="run command-line utility">
+        <java classname="com.acquisio.basic.sql.question01.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+   <target name="run-utility-sql-q2" description="run command-line utility">
+        <java classname="com.acquisio.basic.sql.question02.${utility}"
+                failonerror="true"
+                classpathref="test.classpath">
+		</java>
+   </target>
+   
+
+  <target name="test" depends="test-compile">
+    <junit printsummary="on" haltonfailure="yes" fork="true">
+        <classpath>
+          <path refid="test.classpath"/>
+          <pathelement location="${test.build.dir}"/>
+        </classpath>
+        <formatter type="brief" usefile="false" />
+        <batchtest>
+            <fileset dir="${test.src.dir}" includes="**/*Test.java" />
+        </batchtest>
+    </junit>
+  </target>
+</project>
